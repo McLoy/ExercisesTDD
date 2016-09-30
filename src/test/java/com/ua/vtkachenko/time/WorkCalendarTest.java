@@ -3,12 +3,14 @@ package com.ua.vtkachenko.time;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
 import static org.junit.Assert.*;
 
 public class WorkCalendarTest {
+
     @Test
     public void getInfoTest() {
         WorkCalendar calendar = new WorkCalendar(2016);
@@ -78,5 +80,19 @@ public class WorkCalendarTest {
         LocalDate date = LocalDate.of(2016, Month.SEPTEMBER, 30);
         DateInfo info = calendar.getInfo(date);
         assertEquals("Work day", info.getDescription());
+    }
+
+    @Test
+    public void testTestTypeOfDay() throws Exception {
+        LocalDate start = LocalDate.of(2016,1,1);
+        LocalDate fin = LocalDate.of(2017,1,1);
+        WorkCalendar calendar = new WorkCalendar(2016);
+        while (start.isBefore(fin)) {
+            LocalDate lc = start;
+            DateInfo info = calendar.getInfo(lc);
+            if (lc.getDayOfWeek().equals(DayOfWeek.SATURDAY) || lc.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+            assertEquals(DayType.WEEKEND, info.getType());
+            start = start.plusDays(1);
+        }
     }
 }

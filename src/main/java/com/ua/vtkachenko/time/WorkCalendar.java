@@ -22,12 +22,14 @@ public class WorkCalendar {
             String descr = "";
             if (date.equals(LocalDate.of(2016,8,24))) {
                 descr = "Independence day";
+                return new DateInfo(date, DayType.WEEKEND, descr);
             } else if (date.getDayOfWeek() == DayOfWeek.SUNDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY){
                 descr = "Weekend";
-            } else {descr = "Work day";}
-
-
-            return new DateInfo(date, DayType.WEEKEND, descr);
+                return new DateInfo(date, DayType.WEEKEND, descr);
+            } else {
+                descr = "Work day";
+                return new DateInfo(date, DayType.WORKDAY, descr);
+            }
 
         } else {throw new IllegalArgumentException(); }
     }
