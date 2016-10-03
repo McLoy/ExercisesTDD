@@ -6,7 +6,7 @@ import java.util.*;
 public class WorkCalendar {
 
     private final int year;
-    private TreeSet<DateInfo> wd = new TreeSet<DateInfo>();
+    public TreeSet<DateInfo> wd = new TreeSet<DateInfo>();
 
     public WorkCalendar(int year) {
         if (year > 0){
@@ -14,8 +14,14 @@ public class WorkCalendar {
         } else {throw new IllegalArgumentException();};
     }
 
-    public void addWeekend(LocalDate date, DayType dt, String description) {
-            wd.add(new DateInfo(date, dt, description));
+    public boolean addWeekend(LocalDate date, DayType dt, String descr) {
+
+            return wd.add(new DateInfo(date, dt, descr));
+    }
+
+    public boolean deleteWeekend(DateInfo di) {
+
+        return wd.remove(di);
     }
 
     public DateInfo getInfo(LocalDate date) {

@@ -96,5 +96,49 @@ public class WorkCalendarTest {
         }
     }
 
+    @Test
+    public void testAddSeveralWeekendDays() throws Exception {
 
+        WorkCalendar calendar = new WorkCalendar(2016);
+
+        LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
+        LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
+        LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
+
+        assertEquals(true, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
+        assertEquals(true, calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year"));
+        assertEquals(true, calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine"));
+
+    }
+
+    @Test
+    public void testAddWeekendsDoubles() throws Exception {
+
+        WorkCalendar calendar = new WorkCalendar(2016);
+
+        LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
+
+        assertEquals(true, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
+        assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
+
+    }
+
+    @Test
+    public void testDeleteWeekend() throws Exception {
+
+        WorkCalendar calendar = new WorkCalendar(2016);
+
+        LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
+        LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
+        LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
+
+        calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day");
+        calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year");
+        calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
+
+        LocalDate fordel = LocalDate.of(2016, Month.AUGUST, 24); //Independence day of Ukraine
+        DateInfo di = calendar.getInfo(fordel);
+        assertEquals(true,calendar.deleteWeekend(di));
+
+    }
 }
