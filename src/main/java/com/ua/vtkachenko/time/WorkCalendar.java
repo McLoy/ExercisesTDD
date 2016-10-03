@@ -1,18 +1,21 @@
 package com.ua.vtkachenko.time;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
+import java.util.*;
 
 public class WorkCalendar {
+
     private final int year;
+    private TreeSet<DateInfo> wd = new TreeSet<DateInfo>();
+
     public WorkCalendar(int year) {
         if (year > 0){
         this.year = year;
         } else {throw new IllegalArgumentException();};
     }
 
-    public void addWeekend(LocalDate date, String description) {
-
+    public void addWeekend(LocalDate date, DayType dt, String description) {
+            wd.add(new DateInfo(date, dt, description));
     }
 
     public DateInfo getInfo(LocalDate date) {

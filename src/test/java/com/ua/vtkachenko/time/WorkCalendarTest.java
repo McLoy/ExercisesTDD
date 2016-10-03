@@ -15,7 +15,7 @@ public class WorkCalendarTest {
     public void getInfoTest() {
         WorkCalendar calendar = new WorkCalendar(2016);
         LocalDate date = LocalDate.of(2016, Month.AUGUST, 24);
-        calendar.addWeekend(date, "Independence day");
+        calendar.addWeekend(date, DayType.WEEKEND, "Independence day");
         DateInfo info = calendar.getInfo(date);
         assertNotNull(info);
     }
@@ -24,7 +24,7 @@ public class WorkCalendarTest {
     public void addWeekendTest() throws Exception {
         WorkCalendar calendar = new WorkCalendar(2016);
         LocalDate date = LocalDate.of(2016, Month.AUGUST, 24);
-        calendar.addWeekend(date, "Independence day");
+        calendar.addWeekend(date, DayType.WEEKEND, "Independence day");
         DateInfo info = calendar.getInfo(date);
         assertEquals(date, info.getDate());
         assertEquals(DayType.WEEKEND, info.getType());
@@ -95,4 +95,6 @@ public class WorkCalendarTest {
             start = start.plusDays(1);
         }
     }
+
+
 }
