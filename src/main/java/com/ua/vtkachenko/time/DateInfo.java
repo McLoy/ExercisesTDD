@@ -3,7 +3,8 @@ package com.ua.vtkachenko.time;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class DateInfo implements Comparable{
+public class DateInfo {
+
     private LocalDate date;
     private DayType type;
     private String description;
@@ -42,33 +43,21 @@ public class DateInfo implements Comparable{
             return -1;
         else
             return 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DateInfo dateInfo = (DateInfo) o;
+
+        return date != null ? date.equals(dateInfo.date) : dateInfo.date == null;
 
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int)date.toEpochDay();
-        result = prime * result + description.length();
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        DateInfo other = (DateInfo) obj;
-        if (this.type != type)
-            return false;
-        if (this.date != date)
-            return false;
-        if (this.description != description)
-            return false;
-        return true;
+        return date != null ? date.hashCode() : 0;
     }
 }

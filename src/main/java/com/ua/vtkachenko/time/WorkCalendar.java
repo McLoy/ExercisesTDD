@@ -1,12 +1,14 @@
 package com.ua.vtkachenko.time;
 
+import org.omg.CORBA.Object;
+
 import java.time.*;
 import java.util.*;
 
 public class WorkCalendar {
 
     private final int year;
-    public TreeSet<DateInfo> wd = new TreeSet<DateInfo>();
+    private Set<DateInfo> wd = new HashSet<DateInfo>();
 
     public WorkCalendar(int year) {
         if (year > 0){
@@ -28,6 +30,11 @@ public class WorkCalendar {
 
         if (date.getYear() == year)
         {
+
+//            if (wd.contains(date)){
+//                return new DateInfo((wd.))
+//            }
+
             String descr = "";
             if (date.equals(LocalDate.of(2016,8,24))) {
                 descr = "Independence day";
@@ -42,4 +49,5 @@ public class WorkCalendar {
 
         } else {throw new IllegalArgumentException(); }
     }
+
 }

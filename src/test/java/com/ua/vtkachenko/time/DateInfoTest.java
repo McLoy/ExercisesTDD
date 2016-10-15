@@ -14,12 +14,12 @@ public class DateInfoTest {
 
     @Test(expected = NullPointerException.class)
     public void dateSouldBeNotNull() throws Exception {
-        DateInfo dateInfo = new DateInfo(null, DayType.WEEKEND, "description");
+        DateInfo dateInfo = new DateInfo(null, WEEKEND, DESCRIPTION);
     }
 
    @Test(expected = NullPointerException.class)
-    public void typeSouldBeNotNull() throws Exception {
-        DateInfo dateInfo = new DateInfo(LocalDate.now(), null, "description");
+    public void typeShouldBeNotNull() throws Exception {
+        DateInfo dateInfo = new DateInfo(NOW, null, DESCRIPTION);
     }
 
     @Test

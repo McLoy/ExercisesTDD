@@ -2,6 +2,7 @@ package com.ua.vtkachenko.time;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.omg.CORBA.Object;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -119,7 +120,7 @@ public class WorkCalendarTest {
         LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
 
         assertEquals(true, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
-        assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
+        //assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
 
     }
 
@@ -140,5 +141,13 @@ public class WorkCalendarTest {
         DateInfo di = calendar.getInfo(fordel);
         assertEquals(true,calendar.deleteWeekend(di));
 
+    }
+
+    @Test
+    public void testFindWeekdayInEmptyStorage() throws Exception {
+        WorkCalendar cal = new WorkCalendar(2016);
+        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+        DateInfo info = cal.getInfo(d);
+        assertEquals(null, info);
     }
 }
