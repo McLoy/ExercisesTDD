@@ -30,21 +30,14 @@ public class WorkCalendar {
 
         if (date.getYear() == year)
         {
-
-//            if (wd.contains(date)){
-//                return new DateInfo((wd.))
-//            }
-
-            String descr = "";
-            if (date.equals(LocalDate.of(2016,8,24))) {
-                descr = "Independence day";
-                return new DateInfo(date, DayType.WEEKEND, descr);
-            } else if (date.getDayOfWeek() == DayOfWeek.SUNDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY){
-                descr = "Weekend";
-                return new DateInfo(date, DayType.WEEKEND, descr);
+            for (DateInfo di : wd) {
+                if (di.getDate().equals(date))
+                    return di;
+            }
+            if (date.getDayOfWeek() == DayOfWeek.SUNDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY){
+                return new DateInfo(date, DayType.WEEKEND, "Weekend");
             } else {
-                descr = "Work day";
-                return new DateInfo(date, DayType.WORKDAY, descr);
+                return new DateInfo(date, DayType.WORKDAY, "Work day");
             }
 
         } else {throw new IllegalArgumentException(); }
