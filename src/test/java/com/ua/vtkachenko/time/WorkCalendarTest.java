@@ -143,11 +143,11 @@ public class WorkCalendarTest {
 
     }
 
-    @Test
-    public void testFindWeekdayInEmptyStorage() throws Exception {
-        WorkCalendar cal = new WorkCalendar(2016);
-        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
-        DateInfo info = cal.getInfo(d);
-        assertEquals(null, info);
-    }
+//    @Test
+//    public void testFindWeekdayInEmptyStorage() throws Exception {
+//        WorkCalendar cal = new WorkCalendar(2016);
+//        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+//        DateInfo info = cal.getInfo(d);
+//        assertEquals(null, info);
+//    }
 }

@@ -29,22 +29,6 @@ public class DateInfo {
         return description;
     }
 
-    public int compareTo(Object obj){
-
-        if (!(obj instanceof DateInfo))
-            return 1;
-
-        DateInfo di = (DateInfo)obj;
-        LocalDate d = di.getDate();
-
-        if (this.date.equals(d))
-            return 0;
-        else if (this.date.isBefore(d))
-            return -1;
-        else
-            return 1;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
