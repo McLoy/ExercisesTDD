@@ -43,4 +43,7 @@ public class WorkCalendar {
         } else {throw new IllegalArgumentException(); }
     }
 
+    public int getCountOfHolydays() {
+        return wd.size();
+    }
 }

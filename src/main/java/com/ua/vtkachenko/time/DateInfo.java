@@ -10,11 +10,13 @@ public class DateInfo {
     private String description;
 
     public DateInfo(LocalDate date, DayType type, String description) {
+
         Objects.requireNonNull(date);
         Objects.requireNonNull(type);
         this.date = date;
         this.type = type;
         this.description = description;
+
     }
 
     public LocalDate getDate() {
@@ -31,6 +33,7 @@ public class DateInfo {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -42,6 +45,11 @@ public class DateInfo {
 
     @Override
     public int hashCode() {
-        return date != null ? date.hashCode() : 0;
+
+        if (date != null){
+            int c = date.getDayOfYear();
+            return 37*c + c;
+        } else return 0;
+
     }
 }

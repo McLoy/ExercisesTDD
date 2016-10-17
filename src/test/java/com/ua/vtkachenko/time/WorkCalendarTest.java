@@ -143,11 +143,68 @@ public class WorkCalendarTest {
 
     }
 
-//    @Test
-//    public void testFindWeekdayInEmptyStorage() throws Exception {
-//        WorkCalendar cal = new WorkCalendar(2016);
-//        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
-//        DateInfo info = cal.getInfo(d);
-//        assertEquals(null, info);
-//    }
+    @Test
+    public void testFindWeekdayInEmptyStorage() throws Exception {
+        WorkCalendar cal = new WorkCalendar(2016);
+        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+        DateInfo info = cal.getInfo(d);
+        assertEquals(DayType.WORKDAY, info.getType());
+    }
+
+    @Test
+    public void testReturnWeekdayFromCalendar() throws Exception {
+        WorkCalendar cal = new WorkCalendar(2016);
+        LocalDate di = LocalDate.of(2016, Month.OCTOBER, 17);
+        DateInfo i = cal.getInfo(di);
+        assertEquals(DayType.WORKDAY, i.getType());
+
+    }
+
+    @Test
+    public void testAddedWeekdayDayType() throws Exception {
+
+        WorkCalendar cal = new WorkCalendar(2016);
+        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+        cal.addWeekend(d, DayType.WEEKEND, "Independence day");
+        assertEquals(DayType.WEEKEND, cal.getInfo(d).getType());
+
+    }
+
+    @Test
+    public void testAddAndDeleteWeekday() throws Exception {
+
+        WorkCalendar cal = new WorkCalendar(2016);
+        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+        cal.addWeekend(d, DayType.WEEKEND, "Independence day");
+        assertEquals(true, cal.deleteWeekend(cal.getInfo(d)));
+
+    }
+
+    @Test
+    public void testDelWeekDayFromEmptyCAlendar() throws Exception {
+
+        WorkCalendar wc = new WorkCalendar(2016);
+        LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
+        assertEquals(false, wc.deleteWeekend(wc.getInfo(d)));
+
+    }
+
+    @Test
+    public void testAddWrongFormatDateInCalendar() throws Exception {
+
+        WorkCalendar calendar = new WorkCalendar(2016);
+
+        LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
+        LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
+        LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
+
+        calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day");
+        calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year");
+        calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
+
+        assertEquals(3, calendar.getCountOfHolydays());
+
+
+
+    }
 }
