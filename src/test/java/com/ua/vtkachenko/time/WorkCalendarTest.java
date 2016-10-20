@@ -204,7 +204,14 @@ public class WorkCalendarTest {
 
         assertEquals(3, calendar.getCountOfHolydays());
 
+    }
 
+    @Test
+    public void testAddWeekdayFromWrongYear() throws Exception {
+
+        WorkCalendar calendar = new WorkCalendar(2016);
+        LocalDate weekday1 = LocalDate.of(2015, Month.FEBRUARY, 14);
+        assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
 
     }
 }

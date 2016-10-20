@@ -1,7 +1,5 @@
 package com.ua.vtkachenko.time;
 
-import org.omg.CORBA.Object;
-
 import java.time.*;
 import java.util.*;
 
@@ -18,7 +16,11 @@ public class WorkCalendar {
 
     public boolean addWeekend(LocalDate date, DayType dt, String descr) {
 
+        if (year == date.getYear())
             return wd.add(new DateInfo(date, dt, descr));
+        else
+            return false;
+
     }
 
     public boolean deleteWeekend(DateInfo di) {
