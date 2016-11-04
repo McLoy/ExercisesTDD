@@ -13,9 +13,9 @@ public class WorkCalendar {
         if (year > 0) {
             this.year = year;
             LocalDate curr = LocalDate.of(year,1,1);
-            while (!curr.equals(LocalDate.of(year,12,31))){
+            while (!curr.equals(LocalDate.of(year+1,1,1))){
                 if (curr.getDayOfWeek() == DayOfWeek.SATURDAY || curr.getDayOfWeek() == DayOfWeek.SUNDAY ){
-                    wd.put(curr, "It is weekday");
+                    wd.put(curr, "Weekend");
                 }
                 curr = curr.plusDays(1);
             }
@@ -37,8 +37,12 @@ public class WorkCalendar {
 
     public boolean deleteWeekend(LocalDate di) {
 
-        wd.remove(di);
-        return true;
+        if (wd.get(di) != null){
+            wd.remove(di);
+            return true;
+        } else {
+            return false;
+        }
         //return wd.remove(di);
     }
 
@@ -65,7 +69,7 @@ public class WorkCalendar {
             if (descr != null){
                 return new DateInfo(date, DayType.WEEKEND, descr);
             } else {
-                return new DateInfo(date, DayType.WORKDAY, "Working day");
+                return new DateInfo(date, DayType.WORKDAY, "Work day");
             }
         } else {
             throw new IllegalArgumentException();

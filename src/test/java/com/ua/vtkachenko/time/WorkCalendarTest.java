@@ -8,8 +8,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
+import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class WorkCalendarTest {
 
@@ -97,9 +97,8 @@ public class WorkCalendarTest {
         LocalDate fin = LocalDate.of(2017,1,1);
         WorkCalendar calendar = new WorkCalendar(2016);
         while (start.isBefore(fin)) {
-            LocalDate lc = start;
-            DateInfo info = calendar.getInfo(lc);
-            if (lc.getDayOfWeek().equals(DayOfWeek.SATURDAY) || lc.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+            DateInfo info = calendar.getInfo(start);
+            if (start.getDayOfWeek().equals(DayOfWeek.SATURDAY) || start.getDayOfWeek().equals(DayOfWeek.SUNDAY))
             assertEquals(DayType.WEEKEND, info.getType());
             start = start.plusDays(1);
         }
@@ -210,7 +209,7 @@ public class WorkCalendarTest {
         calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year");
         calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
 
-        assertEquals(3, calendar.getCountOfHolydays());
+        assertEquals(106, calendar.getCountOfHolydays());
 
     }
 
