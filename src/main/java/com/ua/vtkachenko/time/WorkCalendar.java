@@ -79,4 +79,16 @@ public class WorkCalendar {
     public int getCountOfHolydays() {
         return wd.size();
     }
+
+    public boolean isWeekend(LocalDate date) {
+        return wd.get(date) != null;
+    }
+
+    public void setWorkDay(LocalDate day) {
+        wd.remove(day);
+    }
+
+    public String getDescription(LocalDate workDay) {
+        return getInfo(workDay).getDescription();
+    }
 }

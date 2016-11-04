@@ -30,7 +30,7 @@ public class WorkCalendarTest {
     }
 
     @Test
-    public void addWeekendTest() throws Exception {
+    public void addWeekend() throws Exception {
         WorkCalendar calendar = new WorkCalendar(2016);
         LocalDate date = LocalDate.of(2016, Month.AUGUST, 24);
         calendar.addWeekend(date, DayType.WEEKEND, "Independence day");
@@ -106,48 +106,34 @@ public class WorkCalendarTest {
 
     @Test
     public void testAddSeveralWeekendDays() throws Exception {
-
         WorkCalendar calendar = new WorkCalendar(2016);
-
         LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
         LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
         LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
-
         assertEquals(true, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
         assertEquals(true, calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year"));
         assertEquals(true, calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine"));
-
     }
 
     @Test
     public void testAddWeekendsDoubles() throws Exception {
-
         WorkCalendar calendar = new WorkCalendar(2016);
-
         LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
-
         assertEquals(true, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
-        //assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
-
     }
 
     @Test
     public void testDeleteWeekend() throws Exception {
-
         WorkCalendar calendar = new WorkCalendar(2016);
-
         LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
         LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
         LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
-
         calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day");
         calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year");
         calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
-
         LocalDate fordel = LocalDate.of(2016, Month.AUGUST, 24); //Independence day of Ukraine
         DateInfo di = calendar.getInfo(fordel);
         assertEquals(true,calendar.deleteWeekend(fordel));
-
     }
 
     @Test
@@ -164,66 +150,69 @@ public class WorkCalendarTest {
         LocalDate di = LocalDate.of(2016, Month.OCTOBER, 17);
         DateInfo i = cal.getInfo(di);
         assertEquals(DayType.WORKDAY, i.getType());
-
     }
 
     @Test
     public void testAddedWeekdayDayType() throws Exception {
-
         WorkCalendar cal = new WorkCalendar(2016);
         LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
         cal.addWeekend(d, DayType.WEEKEND, "Independence day");
         assertEquals(DayType.WEEKEND, cal.getInfo(d).getType());
-
     }
 
     @Test
     public void testAddAndDeleteWeekday() throws Exception {
-
         WorkCalendar cal = new WorkCalendar(2016);
         LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
         cal.addWeekend(d, DayType.WEEKEND, "Independence day");
         assertEquals(true, cal.deleteWeekend(d));
-
     }
 
     @Test
     public void testDelWeekDayFromEmptyCAlendar() throws Exception {
-
         WorkCalendar wc = new WorkCalendar(2016);
         LocalDate d = LocalDate.of(2016, Month.AUGUST, 24);
         assertEquals(false, wc.deleteWeekend(d));
-
     }
 
     @Test
     public void testAddWrongFormatDateInCalendar() throws Exception {
-
         WorkCalendar calendar = new WorkCalendar(2016);
-
         LocalDate weekday1 = LocalDate.of(2016, Month.FEBRUARY, 14);
         LocalDate weekday2 = LocalDate.of(2016, Month.DECEMBER, 31);
         LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
-
         calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day");
         calendar.addWeekend(weekday2, DayType.WEEKEND, "Happy New Year");
         calendar.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
-
         assertEquals(106, calendar.getCountOfHolydays());
-
     }
 
     @Test
     public void testAddWeekdayFromWrongYear() throws Exception {
-
         WorkCalendar calendar = new WorkCalendar(2016);
         LocalDate weekday1 = LocalDate.of(2015, Month.FEBRUARY, 14);
         assertEquals(false, calendar.addWeekend(weekday1, DayType.WEEKEND, "Happy Valentines Day"));
-
     }
 
     @Test
     public void getAmountOfWeekdays() throws Exception {
         Assertions.assertThat(calendar2016.getCountOfHolydays()).isGreaterThan(0);
+    }
+
+    @Test
+    public void isWeekend() throws Exception {
+        LocalDate weekday3 = LocalDate.of(2016, Month.AUGUST, 24);
+        calendar2016.addWeekend(weekday3, DayType.WEEKEND, "Independence day of Ukraine");
+        Assertions.assertThat(calendar2016.isWeekend(weekday3)).isTrue();
+        Assertions.assertThat(calendar2016.isWeekend(LocalDate.of(2016, 8, 25))).isFalse();
+    }
+
+    @Test
+    public void setWorkDay() throws Exception {
+        LocalDate day = LocalDate.of(2016,11,5);
+        calendar2016.setWorkDay(day);
+        Assertions.assertThat(calendar2016.getInfo(day).getType()).isEqualTo(DayType.WORKDAY);
+        Assertions.assertThat(calendar2016.getDescription(day)).isEqualTo("Work day");
+        Assertions.assertThat(calendar2016.getDescription(LocalDate.of(2016,11,4))).isEqualTo("Work day");
     }
 }
