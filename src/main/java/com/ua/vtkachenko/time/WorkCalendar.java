@@ -6,7 +6,6 @@ import java.util.*;
 public class WorkCalendar {
 
     private final int year;
-    //private Set<DateInfo> wd = new HashSet<DateInfo>();
     private Map<LocalDate, String> wd = new HashMap<LocalDate, String>();
 
     public WorkCalendar(int year) {
@@ -27,7 +26,6 @@ public class WorkCalendar {
     public boolean addWeekend(LocalDate date, DayType dt, String descr) {
 
         if (year == date.getYear()){
-            //return wd.add(new DateInfo(date, dt, descr));
             wd.put(date, descr);
         return true;}
         else
@@ -43,27 +41,9 @@ public class WorkCalendar {
         } else {
             return false;
         }
-        //return wd.remove(di);
     }
 
     public DateInfo getInfo(LocalDate date) {
-
-//        if (date.getYear() == year){
-//            for (DateInfo di : wd) {
-//                if (di.getDate().equals(date))
-//                    return di;
-//            }
-//        }
-//
-//
-//        if (date.getDayOfWeek() == DayOfWeek.SUNDAY || date.getDayOfWeek() == DayOfWeek.SATURDAY) {
-//            return new DateInfo(date, DayType.WEEKEND, "Weekend");
-//        } else {
-//            return new DateInfo(date, DayType.WORKDAY, "Work day");
-//        }
-//
-//        } else {throw new IllegalArgumentException(); }
-
         if(date.getYear() == year){
            String descr =  wd.get(date);
             if (descr != null){
