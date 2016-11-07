@@ -61,7 +61,7 @@ public class WorkCalendar {
     }
 
     public boolean isWeekend(LocalDate date) {
-        return wd.get(date) != null;
+        return wd.containsKey(date);
     }
 
     public void setWorkDay(LocalDate day) {
